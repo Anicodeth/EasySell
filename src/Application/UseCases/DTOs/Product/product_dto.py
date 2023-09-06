@@ -1,15 +1,16 @@
 import dataclasses
 
+from bson import ObjectId
+
 @dataclasses.dataclass
 class CreateProductDto:
+    _id:ObjectId
     name: str
     price: int
     description: str
     image: str
-    categories: list
     quantity: int
     createdAt: str
-    userTelegramId: str
 
     @classmethod
     def from_dict(cls, d):

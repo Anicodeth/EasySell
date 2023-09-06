@@ -12,4 +12,6 @@ class Product:
     categories: list
     quantity: int
     createdAt: str
+    userTelegramId: str
+
     
