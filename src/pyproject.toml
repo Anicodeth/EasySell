@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "easysell"
+version = "1"
+description = ""
+authors = ["Ananya <afmtrendaid@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+bson = "^0.5.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
