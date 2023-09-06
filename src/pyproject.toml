@@ -8,6 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 bson = "^0.5.10"
+pymongo = "^4.5.0"
 
 
 [build-system]

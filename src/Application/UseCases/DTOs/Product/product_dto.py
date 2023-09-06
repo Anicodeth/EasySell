@@ -3,7 +3,7 @@ import dataclasses
 from bson import ObjectId
 
 @dataclasses.dataclass
-class CreateProductDto:
+class ProductDto:
     _id:ObjectId
     name: str
     price: int
