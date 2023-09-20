@@ -1,19 +1,16 @@
 from bson import ObjectId
-from fastapi import APIRouter, Body, HTTPException, JSONResponse, Path
+from fastapi import APIRouter, Body, HTTPException, Path
 from pydantic import BaseModel
 
-from Application.Contracts.iproduct_service import \
-    ProductServiceInterface  # Import the ProductServiceInterface
+from Application.Contracts.iproduct_service import ProductServiceInterface
 from Application.UseCases.DTOs.Product.create_product_dto import \
     CreateProductDto
 from Application.UseCases.DTOs.Product.product_dto import ProductDto
-from Application.UseCases.Services.product_service import \
-    ProductService  # Import the ProductService
+from Application.UseCases.Services.product_service import ProductService
+from Persistence.Repositories.product_repository import ProductRepository
 
-# Initialize the product service using the interface
-product_service: ProductServiceInterface = (
-    ProductService()
-)  # Replace with your actual implementation
+product_repository = ProductRepository([])
+product_service: ProductServiceInterface = ProductService(product_repository)
 
 
 router = APIRouter()
@@ -40,9 +37,7 @@ def list_products():
 def create_product(product_data: ProductCreate):
     product = CreateProductDto(**product_data.dict())
     product_id = product_service.add(product)
-    return JSONResponse(
-        content={"message": "Product created", "product_id": str(product_id)}
-    )
+    return {"message": "Product created", "product_id": str(product_id)}
 
 
 @router.get("/products/{product_id}", response_model=ProductDto)
@@ -60,10 +55,10 @@ def update_product(
 ):
     product = CreateProductDto(**product_data.dict())
     product_service.update(product_id, product)
-    return JSONResponse(content={"message": "Product updated successfully"})
+    return {"message": "Product updated successfully"}
 
 
 @router.delete("/products/{product_id}", response_model=str)
 def delete_product(product_id: ObjectId = Path(..., title="The product ID")):
     product_service.delete(product_id)
-    return JSONResponse(content={"message": "Product deleted successfully"})
+    return {"message": "Product deleted successfully"}

@@ -1,5 +1,5 @@
 from bson import ObjectId
-from fastapi import APIRouter, Body, HTTPException, JSONResponse, Path
+from fastapi import APIRouter, Body, HTTPException, Path
 from pydantic import BaseModel
 
 from Application.Contracts.iuser_service import UserServiceInterface
@@ -31,7 +31,7 @@ def list_users():
 def create_user(user_data: UserCreate):
     user = CreateUserDto(**user_data.dict())
     user_id = user_service.add(user)
-    return JSONResponse(content={"message": "User created", "user_id": str(user_id)})
+    return {"message": "User created", "user_id": str(user_id)}
 
 
 @router.get("/users/{user_id}", response_model=UserDto)
@@ -49,10 +49,10 @@ def update_user(
 ):
     user = CreateUserDto(**user_data.dict())
     user_service.update(user_id, user)
-    return JSONResponse(content={"message": "User updated successfully"})
+    return {"message": "User updated successfully"}
 
 
 @router.delete("/users/{user_id}", response_model=str)
 def delete_user(user_id: ObjectId = Path(..., title="The user ID")):
     user_service.delete(user_id)
-    return JSONResponse(content={"message": "User deleted successfully"})
+    return {"message": "User deleted successfully"}
