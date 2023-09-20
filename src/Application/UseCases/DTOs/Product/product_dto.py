@@ -2,9 +2,10 @@ import dataclasses
 
 from bson import ObjectId
 
+
 @dataclasses.dataclass
 class ProductDto:
-    _id:ObjectId
+    _id: ObjectId
     name: str
     price: int
     description: str

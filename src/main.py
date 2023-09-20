@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from WebApi.Controllers import user_controller, product_controller
+
+from WebApi.Controllers import product_controller, user_controller
 
 app = FastAPI()
 

@@ -1,9 +1,14 @@
 from typing import List
+
 from bson import ObjectId
-from Application.UseCases.DTOs.Product.create_product_dto import CreateProductDto
-from Application.UseCases.DTOs.Product.product_dto import ProductDto
-from Application.Contracts.iproduct_repository import ProductRepositoryInterface
+
+from Application.Contracts.iproduct_repository import \
+    ProductRepositoryInterface
 from Application.Contracts.iproduct_service import ProductServiceInterface
+from Application.UseCases.DTOs.Product.create_product_dto import \
+    CreateProductDto
+from Application.UseCases.DTOs.Product.product_dto import ProductDto
+
 
 class ProductService(ProductServiceInterface):
     def __init__(self, product_repository: ProductRepositoryInterface) -> None:

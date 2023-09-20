@@ -1,8 +1,12 @@
 from abc import ABCMeta, abstractmethod
 from typing import List
+
 from bson import ObjectId
-from Application.UseCases.DTOs.Product.create_product_dto import CreateProductDto
+
+from Application.UseCases.DTOs.Product.create_product_dto import \
+    CreateProductDto
 from Application.UseCases.DTOs.Product.product_dto import ProductDto
+
 
 class ProductServiceInterface(metaclass=ABCMeta):
     @abstractmethod

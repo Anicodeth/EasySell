@@ -1,4 +1,5 @@
 import dataclasses
+
 from bson import ObjectId
 
 
@@ -13,5 +14,3 @@ class Product:
     quantity: int
     createdAt: str
     userTelegramId: str
-
-    

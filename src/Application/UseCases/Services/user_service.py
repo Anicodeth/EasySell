@@ -2,12 +2,10 @@ from typing import List
 
 from bson import ObjectId
 
+from Application.Contracts.iuser_repository import UserRepositoyInterface
+from Application.Contracts.iuser_service import UserServiceInterface
 from Application.UseCases.DTOs.User.create_user_dto import CreateUserDto
 from Application.UseCases.DTOs.User.user_dto import UserDto
-from Application.Contracts.iuser_repository import \
-    UserRepositoyInterface
-from Application.Contracts.iuser_service import \
-    UserServiceInterface
 
 
 class UserService(UserServiceInterface):

@@ -1,12 +1,16 @@
 from typing import Dict, List
+
 from bson import ObjectId
 from pymongo import MongoClient
 
-from Application.UseCases.DTOs.Product.create_product_dto import CreateProductDto
+from Application.Contracts.iproduct_repository import \
+    ProductRepositoryInterface
+from Application.UseCases.DTOs.Product.create_product_dto import \
+    CreateProductDto
 from Application.UseCases.DTOs.Product.product_dto import ProductDto
-from Application.Contracts.iproduct_repository import ProductRepositoryInterface
 
 conn_string = "mongodb+srv://afmtoday:OlxwPFCF0rLMnA3e@cluster0.edrrjyh.mongodb.net/easysell?retryWrites=true&w=majority"
+
 
 class ProductRepository(ProductRepositoryInterface):
     def __init__(self, data: List[Dict[str, object]]):
