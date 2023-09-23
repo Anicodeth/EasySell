@@ -13,7 +13,6 @@ class CreateProductDto(BaseModel):
     image: str
     categories: list
     quantity: int
-    created_at: str
     user_telegram_id: str
 
     @classmethod
@@ -28,6 +27,5 @@ class CreateProductDto(BaseModel):
             image=self.image,
             categories=self.categories,
             quantity=self.quantity,
-            created_at=self.created_at,
             user_telegram_id=self.user_telegram_id,
         )

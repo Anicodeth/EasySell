@@ -47,7 +47,7 @@ class ProductService:
             )
 
     def update(
-        self, product_id: ObjectId, product: CreateProductDto
+            self, product_id: ObjectId, product: CreateProductDto
     ) -> BaseResponse[None, str]:
         try:
             is_updated = self.product_repository.update(product_id, product.to_entity())

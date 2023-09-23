@@ -1,4 +1,5 @@
-from typing import Dict
+from datetime import datetime
+from typing import Dict, List
 
 from pydantic import BaseModel
 
@@ -12,7 +13,8 @@ class ProductDto(BaseModel):
     description: str
     image: str
     quantity: int
-    created_at: str
+    created_at: datetime
+    updated_at: datetime
 
     @classmethod
     def from_entity(cls, entity: Product) -> "ProductDto":
@@ -24,6 +26,7 @@ class ProductDto(BaseModel):
             image=entity.image,
             quantity=entity.quantity,
             created_at=entity.created_at,
+            updated_at=entity.updated_at,
         )
 
     def to_dict(self) -> Dict:

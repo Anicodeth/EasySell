@@ -1,4 +1,5 @@
 import dataclasses
+import datetime
 
 from src.domain.entities.product import Product
 
@@ -11,7 +12,8 @@ class ProductModel:
     image: str
     categories: list
     quantity: int
-    created_at: str
+    created_at: datetime.datetime
+    updated_at: datetime.datetime
     user_telegram_id: str
 
     @classmethod
@@ -28,6 +30,7 @@ class ProductModel:
             categories=entity.categories,
             quantity=entity.quantity,
             created_at=entity.created_at,
+            updated_at=entity.updated_at,
             user_telegram_id=entity.user_telegram_id,
         )
 

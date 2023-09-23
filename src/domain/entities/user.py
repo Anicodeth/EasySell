@@ -1,4 +1,5 @@
 import dataclasses
+from datetime import datetime
 
 from bson import ObjectId
 
@@ -9,6 +10,8 @@ class User:
     telegram_username: str
     phone_number: str
     _id: str = None
+    updated_at: datetime = datetime.now()
+    created_at: datetime = datetime.now()
 
     @classmethod
     def from_dict(cls, d):

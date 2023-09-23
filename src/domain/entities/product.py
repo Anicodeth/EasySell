@@ -1,4 +1,5 @@
 import dataclasses
+from datetime import datetime
 
 from bson import ObjectId
 
@@ -11,9 +12,10 @@ class Product:
     image: str
     categories: list
     quantity: int
-    created_at: str
     user_telegram_id: str
     _id: str = None
+    updated_at: datetime = datetime.now()
+    created_at: datetime = datetime.now()
 
     @classmethod
     def from_dict(cls, d):
