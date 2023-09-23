@@ -3,14 +3,13 @@ from typing import Dict, List
 from bson import ObjectId
 from fastapi import APIRouter, Body, Path
 
-from src.application.use_cases.dtos.product.create_product_dto import \
+from src.application.features.product.dtos.create_product_dto import \
     CreateProductDto
-from src.application.use_cases.dtos.product.product_dto import ProductDto
-from src.application.use_cases.services.product_service import ProductService
+from src.application.features.product.dtos.product_dto import ProductDto
+from src.application.features.product.product_service import ProductService
 from src.persistence.db_client import DbClient
 from src.persistence.repositories.product_repository import ProductRepository
 from src.webapi.responses.api_response import GenericResponse
-from src.webapi.schemas.product_schema import ProductCreate
 
 db_client = DbClient()
 product_repository = ProductRepository(db_client)
@@ -35,8 +34,7 @@ def list_products() -> GenericResponse[List[ProductDto]]:
 
 
 @product_router.post("/")
-def create_product(product_data: ProductCreate) -> GenericResponse[dict]:
-    product = CreateProductDto(**product_data.dict())
+def create_product(product: CreateProductDto) -> GenericResponse[dict]:
     response = product_service.create(product)
 
     if response.is_success:
@@ -51,7 +49,7 @@ def create_product(product_data: ProductCreate) -> GenericResponse[dict]:
 
 @product_router.get("/{product_id}")
 def get_product(
-    product_id: str = Path(..., title="The product ID")
+        product_id: str = Path(..., title="The product ID")
 ) -> GenericResponse[ProductDto]:
     response = product_service.get(ObjectId(product_id))
 
@@ -68,10 +66,9 @@ def get_product(
 
 @product_router.put("/{product_id}")
 def update_product(
-    product_id: str = Path(..., title="The product ID"),
-    product_data: ProductCreate = Body(..., title="Updated product data"),
+        product_id: str = Path(..., title="The product ID"),
+        product: CreateProductDto = Body(..., title="Updated product data"),
 ) -> GenericResponse[None]:
-    product = CreateProductDto(**product_data.dict())
     response = product_service.update(ObjectId(product_id), product)
 
     if response.is_success:
@@ -84,7 +81,7 @@ def update_product(
 
 @product_router.delete("/{product_id}")
 def delete_product(
-    product_id: str = Path(..., title="The product ID")
+        product_id: str = Path(..., title="The product ID")
 ) -> GenericResponse[None]:
     response = product_service.delete(ObjectId(product_id))
 

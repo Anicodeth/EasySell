@@ -5,9 +5,9 @@ from bson import ObjectId
 from src.application.common.responses.base_response import BaseResponse
 from src.application.contracts.persistence.product_repository_contract import \
     ProductRepositoryContract
-from src.application.use_cases.dtos.product.create_product_dto import \
+from src.application.features.product.dtos.create_product_dto import \
     CreateProductDto
-from src.application.use_cases.dtos.product.product_dto import ProductDto
+from src.application.features.product.dtos.product_dto import ProductDto
 
 
 class ProductService:

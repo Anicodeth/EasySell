@@ -3,14 +3,13 @@ from typing import Dict, List
 from bson import ObjectId
 from fastapi import APIRouter, Body, Path
 
-from src.application.use_cases.dtos.user.create_user_dto import \
+from src.application.features.user.dtos.create_user_dto import \
     CreateUserDto
-from src.application.use_cases.dtos.user.user_dto import UserDto
-from src.application.use_cases.services.user_service import UserService
+from src.application.features.user.dtos.user_dto import UserDto
+from src.application.features.user.user_service import UserService
 from src.persistence.db_client import DbClient
 from src.persistence.repositories.user_repository import UserRepository
 from src.webapi.responses.api_response import GenericResponse
-from src.webapi.schemas.user_schema import UserCreate
 
 db_client = DbClient()
 user_repository = UserRepository(db_client)
@@ -35,8 +34,7 @@ def list_users() -> GenericResponse[List[UserDto]]:
 
 
 @user_router.post("/")
-def create_user(user_data: UserCreate) -> GenericResponse[dict]:
-    user = CreateUserDto(**user_data.dict())
+def create_user(user: CreateUserDto) -> GenericResponse[dict]:
     response = user_service.create(user)
 
     if response.is_success:
@@ -69,9 +67,8 @@ def get_user(
 @user_router.put("/{user_id}")
 def update_user(
         user_id: str = Path(..., title="The user ID"),
-        user_data: UserCreate = Body(..., title="Updated user data"),
+        user: CreateUserDto = Body(..., title="Updated user data"),
 ) -> GenericResponse[None]:
-    user = CreateUserDto(**user_data.dict())
     response = user_service.update(ObjectId(user_id), user)
 
     if response.is_success:

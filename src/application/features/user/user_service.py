@@ -5,8 +5,8 @@ from bson import ObjectId
 from src.application.common.responses.base_response import BaseResponse
 from src.application.contracts.persistence.user_repository_contract import \
     UserRepositoryContract
-from src.application.use_cases.dtos.user.create_user_dto import CreateUserDto
-from src.application.use_cases.dtos.user.user_dto import UserDto
+from src.application.features.user.dtos.create_user_dto import CreateUserDto
+from src.application.features.user.dtos.user_dto import UserDto
 
 
 class UserService:
