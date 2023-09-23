@@ -11,3 +11,6 @@ class DbClient:
 
     def get_collection(self, collection_name: str) -> Collection:
         return self.db[collection_name]
+
+    def on_close(self):
+        self.client.close()
