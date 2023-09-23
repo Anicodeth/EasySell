@@ -6,7 +6,7 @@ from bson import ObjectId
 from src.domain.entities.product import Product
 
 
-class ProductRepositoryContract(metaclass=ABCMeta):
+class ABCProductRepository(metaclass=ABCMeta):
     @abstractmethod
     def list(self) -> List[Product]:
         pass
@@ -25,4 +25,8 @@ class ProductRepositoryContract(metaclass=ABCMeta):
 
     @abstractmethod
     def delete(self, product_id: ObjectId) -> bool:
+        pass
+
+    @abstractmethod
+    def get_user_products(self, user_id: str) -> bool:
         pass

@@ -6,7 +6,7 @@ from bson import ObjectId
 from src.domain.entities.user import User
 
 
-class UserRepositoryContract(metaclass=ABCMeta):
+class ABCUserRepository(metaclass=ABCMeta):
     @abstractmethod
     def list(self) -> List[User]:
         pass
