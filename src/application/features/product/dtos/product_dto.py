@@ -1,12 +1,9 @@
-import dataclasses
-
-from bson import ObjectId
+from pydantic import BaseModel
 
 from src.domain.entities.product import Product
 
 
-@dataclasses.dataclass
-class ProductDto:
+class ProductDto(BaseModel):
     _id: str
     name: str
     price: int
@@ -14,10 +11,6 @@ class ProductDto:
     image: str
     quantity: int
     created_at: str
-
-    @classmethod
-    def from_dict(cls, d):
-        return cls(**d)
 
     @classmethod
     def from_entity(cls, entity: Product) -> "ProductDto":
@@ -32,4 +25,4 @@ class ProductDto:
         )
 
     def to_dict(self):
-        return dataclasses.asdict(self)
+        return self.dict()

@@ -1,10 +1,12 @@
 import dataclasses
 
+from pydantic import BaseModel
+
 from src.domain.entities.product import Product
 
 
 @dataclasses.dataclass
-class CreateProductDto:
+class CreateProductDto(BaseModel):
     name: str
     price: int
     description: str
@@ -29,6 +31,3 @@ class CreateProductDto:
             created_at=self.created_at,
             user_telegram_id=self.user_telegram_id,
         )
-
-    def to_dict(self):
-        return dataclasses.asdict(self)

@@ -1,23 +1,21 @@
 import dataclasses
 
 from src.domain.entities.user import User
+from pydantic import BaseModel
 
 
-@dataclasses.dataclass
-class UserDto:
+class UserDto(BaseModel):
+    _id: str
     telegram_username: str
-    phone_number: int
-
-    @classmethod
-    def from_dict(cls, d):
-        return cls(**d)
+    phone_number: str
 
     @classmethod
     def from_entity(cls, entity: User) -> "UserDto":
         return cls(
+            _id=str(entity._id),
             telegram_username=entity.telegram_username,
             phone_number=entity.phone_number,
         )
 
     def to_dict(self):
-        return dataclasses.asdict(self)
+        return self.dict()

@@ -1,13 +1,13 @@
 import dataclasses
 
+from pydantic import BaseModel
 from src.domain.entities.user import User
 
 
-@dataclasses.dataclass
-class CreateUserDto:
+class CreateUserDto(BaseModel):
     telegram_id: str
     telegram_username: str
-    phone_number: int
+    phone_number: str
 
     @classmethod
     def from_dict(cls, d):
@@ -19,6 +19,3 @@ class CreateUserDto:
             telegram_username=self.telegram_username,
             phone_number=self.phone_number,
         )
-
-    def to_dict(self):
-        return dataclasses.asdict(self)
