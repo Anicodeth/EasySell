@@ -3,7 +3,8 @@ from typing import Dict, List
 from bson import ObjectId
 from fastapi import APIRouter, Body, Path
 
-from src.application.features.product.dtos.create_product_dto import CreateProductDto
+from src.application.features.product.dtos.create_product_dto import \
+    CreateProductDto
 from src.application.features.product.dtos.product_dto import ProductDto
 from src.application.features.product.product_service import ProductService
 from src.persistence.db_client import DbClient
@@ -48,7 +49,7 @@ def create_product(product: CreateProductDto) -> GenericResponse[dict]:
 
 @product_router.get("/{product_id}")
 def get_product(
-        product_id: str = Path(..., title="The product ID")
+    product_id: str = Path(..., title="The product ID")
 ) -> GenericResponse[ProductDto]:
     response = product_service.get(ObjectId(product_id))
 
@@ -65,8 +66,8 @@ def get_product(
 
 @product_router.put("/{product_id}")
 def update_product(
-        product_id: str = Path(..., title="The product ID"),
-        product: CreateProductDto = Body(..., title="Updated product data"),
+    product_id: str = Path(..., title="The product ID"),
+    product: CreateProductDto = Body(..., title="Updated product data"),
 ) -> GenericResponse[None]:
     response = product_service.update(ObjectId(product_id), product)
 
@@ -80,7 +81,7 @@ def update_product(
 
 @product_router.delete("/{product_id}")
 def delete_product(
-        product_id: str = Path(..., title="The product ID")
+    product_id: str = Path(..., title="The product ID")
 ) -> GenericResponse[None]:
     response = product_service.delete(ObjectId(product_id))
 
