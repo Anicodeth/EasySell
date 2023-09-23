@@ -1,4 +1,4 @@
-from typing import TypeVar, Optional, Generic
+from typing import Generic, Optional, TypeVar
 
 from pydantic import BaseModel, Field
 
@@ -11,5 +11,5 @@ class ApiResponse(BaseModel):
 
 
 class GenericResponse(ApiResponse, Generic[T]):
-    value: T = None
-    error: Optional[dict] = None
+    value: Optional[T] = None
+    error: Optional[str] = None

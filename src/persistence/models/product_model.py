@@ -14,7 +14,7 @@ class ProductModel:
     quantity: int
     created_at: datetime.datetime
     updated_at: datetime.datetime
-    user_telegram_id: str
+    user_id: str
 
     @classmethod
     def from_dict(cls, d):
@@ -31,7 +31,7 @@ class ProductModel:
             quantity=entity.quantity,
             created_at=entity.created_at,
             updated_at=entity.updated_at,
-            user_telegram_id=entity.user_telegram_id,
+            user_id=entity.user_id,
         )
 
     def to_dict(self):

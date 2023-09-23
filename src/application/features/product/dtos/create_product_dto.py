@@ -13,7 +13,7 @@ class CreateProductDto(BaseModel):
     image: str
     categories: list
     quantity: int
-    user_telegram_id: str
+    user_id: str
 
     @classmethod
     def from_dict(cls, d) -> "CreateProductDto":
@@ -27,5 +27,5 @@ class CreateProductDto(BaseModel):
             image=self.image,
             categories=self.categories,
             quantity=self.quantity,
-            user_telegram_id=self.user_telegram_id,
+            user_id=self.user_id,
         )

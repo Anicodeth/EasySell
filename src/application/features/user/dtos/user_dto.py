@@ -6,7 +6,6 @@ from pydantic import BaseModel
 
 class UserDto(BaseModel):
     id: str
-    telegram_username: str
     telegram_id: str
     phone_number: str
 
@@ -15,7 +14,6 @@ class UserDto(BaseModel):
         print(entity._id)
         return cls(
             id=str(entity._id),
-            telegram_username=entity.telegram_username,
             telegram_id=entity.telegram_id,
             phone_number=entity.phone_number,
         )

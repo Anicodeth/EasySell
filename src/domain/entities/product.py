@@ -1,8 +1,6 @@
 import dataclasses
 from datetime import datetime
 
-from bson import ObjectId
-
 
 @dataclasses.dataclass
 class Product:
@@ -12,7 +10,8 @@ class Product:
     image: str
     categories: list
     quantity: int
-    user_telegram_id: str
+    user_id: str
+
     _id: str = None
     updated_at: datetime = datetime.now()
     created_at: datetime = datetime.now()

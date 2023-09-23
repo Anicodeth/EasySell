@@ -4,7 +4,6 @@ from src.domain.entities.user import User
 
 class CreateUserDto(BaseModel):
     telegram_id: str
-    telegram_username: str
     phone_number: str
 
     @classmethod
@@ -14,6 +13,5 @@ class CreateUserDto(BaseModel):
     def to_entity(self) -> User:
         return User(
             telegram_id=self.telegram_id,
-            telegram_username=self.telegram_username,
             phone_number=self.phone_number,
         )
