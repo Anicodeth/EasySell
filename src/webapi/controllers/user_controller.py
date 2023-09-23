@@ -3,8 +3,7 @@ from typing import Dict, List
 from bson import ObjectId
 from fastapi import APIRouter, Body, Path
 
-from src.application.features.user.dtos.create_user_dto import \
-    CreateUserDto
+from src.application.features.user.dtos.create_user_dto import CreateUserDto
 from src.application.features.user.dtos.user_dto import UserDto
 from src.application.features.user.user_service import UserService
 from src.persistence.db_client import DbClient
@@ -25,7 +24,7 @@ def list_users() -> GenericResponse[List[UserDto]]:
     if response.is_success:
         return GenericResponse[List[UserDto]](
             success=True,
-            value=list(map(UserDto.to_dict, response.value)),
+            value=[user.to_dict() for user in response.value],
             message="Users retrieved successfully",
         )
     return GenericResponse[List[UserDto]](
@@ -48,9 +47,7 @@ def create_user(user: CreateUserDto) -> GenericResponse[dict]:
 
 
 @user_router.get("/{user_id}")
-def get_user(
-        user_id: str = Path(..., title="The user ID")
-) -> GenericResponse[UserDto]:
+def get_user(user_id: str = Path(..., title="The user ID")) -> GenericResponse[UserDto]:
     response = user_service.get(ObjectId(user_id))
 
     if response.is_success:
@@ -59,15 +56,13 @@ def get_user(
             value=response.value.to_dict(),
             message="User retrieved successfully",
         )
-    return GenericResponse[UserDto](
-        success=False, value=None, message=response.error
-    )
+    return GenericResponse[UserDto](success=False, value=None, message=response.error)
 
 
 @user_router.put("/{user_id}")
 def update_user(
-        user_id: str = Path(..., title="The user ID"),
-        user: CreateUserDto = Body(..., title="Updated user data"),
+    user_id: str = Path(..., title="The user ID"),
+    user: CreateUserDto = Body(..., title="Updated user data"),
 ) -> GenericResponse[None]:
     response = user_service.update(ObjectId(user_id), user)
 
@@ -80,9 +75,7 @@ def update_user(
 
 
 @user_router.delete("/{user_id}")
-def delete_user(
-        user_id: str = Path(..., title="The user ID")
-) -> GenericResponse[None]:
+def delete_user(user_id: str = Path(..., title="The user ID")) -> GenericResponse[None]:
     response = user_service.delete(ObjectId(user_id))
 
     if response.is_success:

@@ -3,8 +3,7 @@ from typing import Dict, List
 from bson import ObjectId
 from fastapi import APIRouter, Body, Path
 
-from src.application.features.product.dtos.create_product_dto import \
-    CreateProductDto
+from src.application.features.product.dtos.create_product_dto import CreateProductDto
 from src.application.features.product.dtos.product_dto import ProductDto
 from src.application.features.product.product_service import ProductService
 from src.persistence.db_client import DbClient
@@ -25,7 +24,7 @@ def list_products() -> GenericResponse[List[ProductDto]]:
     if response.is_success:
         return GenericResponse[List[ProductDto]](
             success=True,
-            value=list(map(ProductDto.to_dict, response.value)),
+            value=[product.to_dict() for product in response.value],
             message="Products retrieved successfully",
         )
     return GenericResponse[List[ProductDto]](
