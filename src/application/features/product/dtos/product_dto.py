@@ -1,10 +1,12 @@
+from typing import Dict
+
 from pydantic import BaseModel
 
 from src.domain.entities.product import Product
 
 
 class ProductDto(BaseModel):
-    _id: str
+    id: str
     name: str
     price: int
     description: str
@@ -15,7 +17,7 @@ class ProductDto(BaseModel):
     @classmethod
     def from_entity(cls, entity: Product) -> "ProductDto":
         return cls(
-            _id=str(entity._id),
+            id=str(entity._id),
             name=entity.name,
             price=entity.price,
             description=entity.description,
@@ -24,5 +26,5 @@ class ProductDto(BaseModel):
             created_at=entity.created_at,
         )
 
-    def to_dict(self):
+    def to_dict(self) -> Dict:
         return self.dict()

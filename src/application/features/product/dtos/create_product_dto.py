@@ -17,7 +17,7 @@ class CreateProductDto(BaseModel):
     user_telegram_id: str
 
     @classmethod
-    def from_dict(cls, d):
+    def from_dict(cls, d) -> "CreateProductDto":
         return cls(**d)
 
     def to_entity(self) -> Product:

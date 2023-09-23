@@ -1,5 +1,3 @@
-import dataclasses
-
 from pydantic import BaseModel
 from src.domain.entities.user import User
 
@@ -10,7 +8,7 @@ class CreateUserDto(BaseModel):
     phone_number: str
 
     @classmethod
-    def from_dict(cls, d):
+    def from_dict(cls, d) -> "CreateUserDto":
         return cls(**d)
 
     def to_entity(self) -> User:
